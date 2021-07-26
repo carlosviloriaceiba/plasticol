@@ -36,7 +36,7 @@ pipeline {
     stage('Test') {
       steps{
         echo "------------>Test<------------"
-        sh 'npm run test'
+        sh 'npm run test -- --browsers ChromeHeadless'
       }
     }
     stage('Static Code Analysis') {
