@@ -1,9 +1,23 @@
 export class Producto {
-    id: string;
-    descripcion: string;
 
-    constructor(id: string, descripcion: string) {
+    id: string;
+    name: string;
+    active: boolean;
+    price: number;
+    percentageSurcharge: number;
+    createdAt: string;
+    updateAt: string;
+    deletedAt: string;
+
+    constructor(id: string, name: string, active: boolean, price: number, 
+                percentageSurcharge: number, createdAt: string,updateAt: string, deletedAt: string) {
         this.id = id;
-        this.descripcion = descripcion;
+        this.name = name;
+        this.active = active;
+        this.price = price;
+        this.percentageSurcharge = percentageSurcharge;
+        this.createdAt = createdAt;
+        this.updateAt = updateAt;
+        this.deletedAt = deletedAt;
     }
 }

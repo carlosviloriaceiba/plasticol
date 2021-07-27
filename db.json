@@ -1,0 +1,232 @@
+{
+  "requests": [
+    {
+      "id": 1,
+      "city": "Cartagena",
+      "address": "carrera 30 #63B 30",
+      "productId": 1,
+      "product": {
+        "id": 1,
+        "name": "Poliestireno (PS)",
+        "active": true,
+        "price": 300,
+        "percentage_surcharge": 10,
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      },
+      "material_count": 2,
+      "material_unit": "Ton",
+      "contact_person": "Rogelio Martinez",
+      "contact_number": "3009002222",
+      "day_to_dispatch": "2021-08-01 08:00:00",
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null,
+      "userId": 1,
+      "user": {
+        "id": 1,
+        "name": "SOFY",
+        "last_name": "PLASTIC",
+        "document": "112000000",
+        "nit": "N900517190",
+        "email": "admin@sofyplastic.com",
+        "status": "active",
+        "type": "client",
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      }
+    },
+    {
+      "id": 2,
+      "city": "Santa marta",
+      "address": "carrera 30 #63B 30",
+      "productId": 2,
+      "product": {
+        "id": 2,
+        "name": "PET",
+        "active": true,
+        "price": 250,
+        "percentage_surcharge": 10,
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      },
+      "material_count": 12,
+      "material_unit": "Ton",
+      "contact_person": "Francis Martinez",
+      "contact_number": "3009002222",
+      "day_to_dispatch": "2021-08-15 08:00:00",
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null,
+      "userId": 1,
+      "user": {
+        "id": 1,
+        "name": "SOFY PLASTIC",
+        "contact": "admin@sofyplastic.com",
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      }
+    },
+    {
+      "id": 3,
+      "city": "Envigado",
+      "address": "Diagonal 31C #38 sur 07",
+      "productId": 3,
+      "product": {
+        "id": 3,
+        "name": "Aluminio",
+        "active": true,
+        "price": 500,
+        "percentage_surcharge": 12,
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      },
+      "material_count": 100,
+      "material_unit": "KG",
+      "contact_person": "Francis Martinez",
+      "contact_number": "3009002222",
+      "day_to_dispatch": "2021-08-15 08:00:00",
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null,
+      "userId": 2,
+      "user": {
+        "id": 2,
+        "name": "RIMAX",
+        "last_name": null,
+        "document": "789228093",
+        "nit": "N90051716",
+        "email": "admin@rimax.com",
+        "status": "active",
+        "type": "client",
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      }
+    },
+    {
+      "city": "Cartagena",
+      "address": "carrera 30 #63B 30",
+      "productId": 1,
+      "product": {
+        "id": 1,
+        "name": "Poliestireno (PS)",
+        "active": true,
+        "price": 300,
+        "percentage_surcharge": 10,
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      },
+      "material_count": 23,
+      "material_unit": "Ton",
+      "contact_person": "Carlos Viloria",
+      "contact_number": "3009111111",
+      "day_to_dispatch": "2021-09-10 08:00:00",
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null,
+      "userId": 1,
+      "user": {
+        "id": 1,
+        "name": "SOFY",
+        "last_name": "PLASTIC",
+        "document": "112000000",
+        "nit": "N900517190",
+        "email": "admin@sofyplastic.com",
+        "status": "active",
+        "type": "client",
+        "created_at": "2021-01-01 08:00:59",
+        "update_at": "2021-01-01 08:00:59",
+        "deleted_at": null
+      },
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Poliestireno (PS)",
+      "active": true,
+      "price": 300,
+      "percentage_surcharge": 10,
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null
+    },
+    {
+      "id": 2,
+      "name": "PET",
+      "active": true,
+      "price": 250,
+      "percentage_surcharge": 10,
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null
+    },
+    {
+      "id": 3,
+      "name": "Aluminio",
+      "active": true,
+      "price": 500,
+      "percentage_surcharge": 12,
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "SOFY",
+      "last_name": "PLASTIC",
+      "document": "112000000",
+      "nit": "N900517190",
+      "email": "admin@sofyplastic.com",
+      "status": "active",
+      "type": "client",
+      "password": "user1",
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null
+    },
+    {
+      "id": 2,
+      "name": "RIMAX",
+      "last_name": null,
+      "document": "789228093",
+      "nit": "N90051716",
+      "email": "admin@rimax.com",
+      "status": "active",
+      "type": "client",
+      "password": "user2",
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null
+    },
+    {
+      "id": 3,
+      "name": "Manuela",
+      "last_name": "Alvarez",
+      "document": "789222323",
+      "nit": null,
+      "email": "manuela.alvarez@plasticol.com.co",
+      "status": "active",
+      "type": "asesorPlasticol",
+      "password": "user3",
+      "created_at": "2021-01-01 08:00:59",
+      "update_at": "2021-01-01 08:00:59",
+      "deleted_at": null
+    }
+  ],
+  "summary": {
+    "request_ton": 40.5,
+    "pending_ton": 2.3,
+    "percentage_success_request": 96
+  }
+}

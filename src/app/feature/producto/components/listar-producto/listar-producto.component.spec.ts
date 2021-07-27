@@ -13,7 +13,7 @@ describe('ListarProductoComponent', () => {
   let component: ListarProductoComponent;
   let fixture: ComponentFixture<ListarProductoComponent>;
   let productoService: ProductoService;
-  const listaProductos: Producto[] = [new Producto('1', 'Producto 1'), new Producto('2', 'Producto 2')];
+  const listaProductos: Producto[] = [new Producto('1', 'Producto 1', true,300,11,'2020-01-01 08:00:00','2020-01-01 08:00:00', null), new Producto('2', 'Producto 2', true,300,11,'2020-01-01 08:00:00','2020-01-01 08:00:00', null)];
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

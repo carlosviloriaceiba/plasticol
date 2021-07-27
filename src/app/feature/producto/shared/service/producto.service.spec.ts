@@ -10,8 +10,7 @@ import { HttpResponse } from '@angular/common/http';
 describe('ProductoService', () => {
   let httpMock: HttpTestingController;
   let service: ProductoService;
-  const apiEndpointProductoConsulta = `${environment.endpoint}/tiposFamilia`;
-  const apiEndpointProductos = `${environment.endpoint}/productos`;
+  const apiEndpointProductos = `${environment.endpoint}/products`;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
@@ -29,19 +28,20 @@ describe('ProductoService', () => {
 
   it('deberia listar productos', () => {
     const dummyProductos = [
-      new Producto('1', 'Producto 1'), new Producto('2', 'Producto 2')
+      new Producto('1', 'Producto 1', true, 300, 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null),
+      new Producto('2', 'Producto 2', true, 300 , 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null)
     ];
     service.consultar().subscribe(productos => {
       expect(productos.length).toBe(2);
       expect(productos).toEqual(dummyProductos);
     });
-    const req = httpMock.expectOne(apiEndpointProductoConsulta);
+    const req = httpMock.expectOne(apiEndpointProductos);
     expect(req.request.method).toBe('GET');
     req.flush(dummyProductos);
   });
 
   it('deberia crear un producto', () => {
-    const dummyProducto = new Producto('1', 'Producto 1');
+    const dummyProducto = new Producto('1', 'Producto 1', true, 300, 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null);
     service.guardar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
@@ -51,7 +51,7 @@ describe('ProductoService', () => {
   });
 
   it('deberia eliminar un producto', () => {
-    const dummyProducto = new Producto('1', 'Producto 1');
+    const dummyProducto = new Producto('1', 'Producto 1', true, 300, 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null);
     service.eliminar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
