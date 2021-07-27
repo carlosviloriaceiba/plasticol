@@ -28,8 +28,8 @@ describe('ProductoService', () => {
 
   it('deberia listar productos', () => {
     const dummyProductos = [
-      new Producto('1', 'Producto 1', true, 300, 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null),
-      new Producto('2', 'Producto 2', true, 300 , 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null)
+      new Producto('1', 'Producto 1',  300, 11),
+      new Producto('2', 'Producto 2',  300, 11)
     ];
     service.consultar().subscribe(productos => {
       expect(productos.length).toBe(2);
@@ -41,7 +41,7 @@ describe('ProductoService', () => {
   });
 
   it('deberia crear un producto', () => {
-    const dummyProducto = new Producto('1', 'Producto 1', true, 300, 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null);
+    const dummyProducto = new Producto('1', 'Producto 1', 300, 11);
     service.guardar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
@@ -51,7 +51,7 @@ describe('ProductoService', () => {
   });
 
   it('deberia eliminar un producto', () => {
-    const dummyProducto = new Producto('1', 'Producto 1', true, 300, 11, '2020-01-01 08:00:00', '2020-01-01 08:00:00', null);
+    const dummyProducto = new Producto('1', 'Producto 1', 300, 11);
     service.eliminar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });

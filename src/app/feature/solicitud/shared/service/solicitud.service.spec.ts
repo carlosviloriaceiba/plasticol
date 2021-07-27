@@ -31,35 +31,20 @@ describe('SolicitudService', () => {
   it('listar solicitudes', () => {
     const dummySolicitud = [
       new Solicitud('1',
-                    'Bogota',
                     'Calle 55 #32',
                     1,
-                    null,
                     23,
                     'Ton',
-                    'Patricia Alvarez',
                     '30024902',
-                    '2021-08-01 08:00:00',
-                    '2021-07-27 09:00:00',
-                    '2021-07-27 09:00:00',
-                    null,
-                    1,
-                    null),
+                    '2021-08-01 08:00:00'),
       new Solicitud('2',
-                    'Barranquilla',
                     'Calle 55 #32',
                     3,
-                    null,
                     633,
                     'KG',
-                    'Roberto Martin',
                     '3002222222',
                     '2021-08-01 08:00:00',
-                    '2021-07-27 09:00:00',
-                    '2021-07-27 09:00:00',
-                    null,
-                    1,
-                    null)
+                    )
     ];
     service.consultar().subscribe(solicitudes => {
       expect(solicitudes.length).toBe(2);
@@ -72,20 +57,12 @@ describe('SolicitudService', () => {
 
   it('crear un producto', () => {
     const dummySolicitud = new Solicitud('1',
-    'Bogota',
     'Calle 55 #32',
     1,
-    null,
     23,
     'Ton',
-    'Patricia Alvarez',
     '30024902',
-    '2021-08-01 08:00:00',
-    '2021-07-27 09:00:00',
-    '2021-07-27 09:00:00',
-    null,
-    1,
-    null);
+    '2021-08-01 08:00:00');
     service.guardar(dummySolicitud).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
@@ -96,20 +73,12 @@ describe('SolicitudService', () => {
 
   it('eliminar un producto', () => {
     const dummyProducto = new Solicitud('1',
-    'Bogota',
     'Calle 55 #32',
     1,
-    null,
     23,
     'Ton',
-    'Patricia Alvarez',
     '30024902',
-    '2021-08-01 08:00:00',
-    '2021-07-27 09:00:00',
-    '2021-07-27 09:00:00',
-    null,
-    1,
-    null);
+    '2021-08-01 08:00:00');
     service.eliminar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
