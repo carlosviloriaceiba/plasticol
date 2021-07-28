@@ -4,8 +4,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ProductoService } from './producto.service';
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
-import { Producto } from '../model/producto';
 import { HttpResponse } from '@angular/common/http';
+import { Producto } from '@shared/model/producto';
 
 describe('ProductoService', () => {
   let httpMock: HttpTestingController;
@@ -27,9 +27,23 @@ describe('ProductoService', () => {
   });
 
   it('deberia listar productos', () => {
-    const dummyProductos = [
-      new Producto('1', 'Producto 1',  300, 11),
-      new Producto('2', 'Producto 2',  300, 11)
+    const dummyProductos: Producto [] = [
+      {
+        id: 1,
+        name: 'Producto 1',
+        price: 300,
+        percentage_surcharge: 11,
+        created_at: '2021-07-01 08:00:00',
+        update_at: '2021-07-01 08:00:00',
+      },
+      {
+        id: 2,
+        name: 'Producto 2',
+        price: 300,
+        percentage_surcharge: 11,
+        created_at: '2021-07-01 08:00:00',
+        update_at: '2021-07-01 08:00:00',
+      }
     ];
     service.consultar().subscribe(productos => {
       expect(productos.length).toBe(2);
@@ -41,7 +55,14 @@ describe('ProductoService', () => {
   });
 
   it('deberia crear un producto', () => {
-    const dummyProducto = new Producto('1', 'Producto 1', 300, 11);
+    const dummyProducto: Producto = {
+      id: 2,
+      name: 'Producto 2',
+      price: 300,
+      percentage_surcharge: 11,
+      created_at: '2021-07-01 08:00:00',
+      update_at: '2021-07-01 08:00:00',
+    };
     service.guardar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
@@ -51,7 +72,14 @@ describe('ProductoService', () => {
   });
 
   it('deberia eliminar un producto', () => {
-    const dummyProducto = new Producto('1', 'Producto 1', 300, 11);
+    const dummyProducto: Producto = {
+      id: 1,
+      name: 'Producto 1',
+      price: 300,
+      percentage_surcharge: 11,
+      created_at: '2021-07-01 08:00:00',
+      update_at: '2021-07-01 08:00:00',
+    };
     service.eliminar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Summary } from '@core/modelo/summary';
+import { Summary } from '@shared/model/summary';
 import { environment } from 'src/environments/environment';
-import { HttpService } from './http.service';
+import { HttpService } from '../../core/services/http.service';
 
 @Injectable()
 export class SummaryService {

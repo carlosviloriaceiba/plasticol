@@ -29,22 +29,41 @@ describe('SolicitudService', () => {
   });
 
   it('listar solicitudes', () => {
-    const dummySolicitud = [
-      new Solicitud('1',
-                    'Calle 55 #32',
-                    1,
-                    23,
-                    'Ton',
-                    '30024902',
-                    '2021-08-01 08:00:00'),
-      new Solicitud('2',
-                    'Calle 55 #32',
-                    3,
-                    633,
-                    'KG',
-                    '3002222222',
-                    '2021-08-01 08:00:00',
-                    )
+    const dummySolicitud: Solicitud[] =  [
+
+      {
+        id: 1,
+        city: 'Bogota',
+        address:  'Calle 55 #32',
+        productId: 1,
+        material_count: 23,
+        material_unit: 'Ton',
+        contact_person: 'Carlos Viloria',
+        contact_number: '3003003030',
+        day_to_ispatch:  '2021-08-01 08:00:00',
+        created_at:  '2021-07-01 08:00:00',
+        update_at:  '2021-07-01 08:00:00',
+        delete_at: null,
+        userId: 1,
+      },
+      {
+        id: 2,
+        city: 'Cartagena',
+        address:  'Calle 55 #32',
+        productId: 2,
+        material_count: 633,
+        material_unit: 'KG',
+        contact_person: 'Viviana Villa',
+        contact_number: '3003003131',
+        day_to_ispatch:  '2021-09-11 08:00:00',
+        created_at:  '2021-07-01 08:00:00',
+        update_at:  '2021-07-01 08:00:00',
+        delete_at: null,
+        userId: 1,
+      },
+
+
+
     ];
     service.consultar().subscribe(solicitudes => {
       expect(solicitudes.length).toBe(2);
@@ -56,13 +75,21 @@ describe('SolicitudService', () => {
   });
 
   it('crear un producto', () => {
-    const dummySolicitud = new Solicitud('1',
-    'Calle 55 #32',
-    1,
-    23,
-    'Ton',
-    '30024902',
-    '2021-08-01 08:00:00');
+    const dummySolicitud: Solicitud = {
+      id: 1,
+      city: 'Bogota',
+      address:  'Calle 55 #32',
+      productId: 1,
+      material_count: 23,
+      material_unit: 'Ton',
+      contact_person: 'Carlos Viloria',
+      contact_number: '3003003030',
+      day_to_ispatch:  '2021-08-01 08:00:00',
+      created_at:  '2021-07-01 08:00:00',
+      update_at:  '2021-07-01 08:00:00',
+      delete_at: null,
+      userId: 1,
+    };
     service.guardar(dummySolicitud).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
@@ -72,13 +99,21 @@ describe('SolicitudService', () => {
   });
 
   it('eliminar un producto', () => {
-    const dummyProducto = new Solicitud('1',
-    'Calle 55 #32',
-    1,
-    23,
-    'Ton',
-    '30024902',
-    '2021-08-01 08:00:00');
+    const dummyProducto: Solicitud = {
+      id: 1,
+      city: 'Bogota',
+      address:  'Calle 55 #32',
+      productId: 1,
+      material_count: 23,
+      material_unit: 'Ton',
+      contact_person: 'Carlos Viloria',
+      contact_number: '3003003030',
+      day_to_ispatch:  '2021-08-01 08:00:00',
+      created_at:  '2021-07-01 08:00:00',
+      update_at:  '2021-07-01 08:00:00',
+      delete_at: null,
+      userId: 1,
+    };
     service.eliminar(dummyProducto).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
