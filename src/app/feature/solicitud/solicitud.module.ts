@@ -5,12 +5,14 @@ import { SharedModule } from '@shared/shared.module';
 
 import { SolicitudComponent } from './components/solicitud/solicitud.component';
 import { SolicitudService } from './shared/service/solicitud.service';
-import { SolicitudRoutingModule } from './solictud-routing.module';
+import { SolicitudRoutingModule } from './solicitud-routing.module';
+import { CrearSolicitudComponent } from './components/crear-solicitud/crear-solicitud.component';
 
 
 @NgModule({
   declarations: [
-    SolicitudComponent
+    SolicitudComponent,
+    CrearSolicitudComponent
   ],
   imports: [
     SolicitudRoutingModule,
@@ -18,4 +20,4 @@ import { SolicitudRoutingModule } from './solictud-routing.module';
   ],
   providers: [SolicitudService]
 })
-export class SolcitudModule { }
+export class SolicitudModule { }

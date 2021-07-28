@@ -4,12 +4,14 @@ import { CrearProductoComponent } from './components/crear-producto/crear-produc
 import { ListarProductoComponent } from './components/listar-producto/listar-producto.component';
 import { BorrarProductoComponent } from './components/borrar-producto/borrar-producto.component';
 import { ProductoComponent } from './components/producto/producto.component';
+import { SecurityGuard } from '@core/guard/security.guard';
 
 
 const routes: Routes = [
   {
     path: '',
     component: ProductoComponent,
+    canActivate: [SecurityGuard],
     children: [
       {
         path: 'crear',

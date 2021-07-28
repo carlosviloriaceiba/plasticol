@@ -2,12 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SecurityGuard } from '@core/guard/security.guard';
 import { HomeComponent } from '@home/home.component';
+import { LoginComponent } from '@login/login.component';
+
+
+
+
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [SecurityGuard]  },
-  { path: 'producto', loadChildren: () => import('@producto/producto.module').then(mod => mod.ProductoModule) }
+  { path: 'login', component: LoginComponent  },
+  { path: 'producto', loadChildren: () => import('@producto/producto.module').then(mod => mod.ProductoModule) },
+  { path: 'solicitud', loadChildren: () => import('@solicitud/solicitud.module').then(mod => mod.SolicitudModule) }
 ];
 
 @NgModule({

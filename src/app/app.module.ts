@@ -8,6 +8,12 @@ import { ProductoModule } from '@producto/producto.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SolicitudModule } from '@solicitud/solicitud.module';
+import { LoginComponent } from '@login/login.component';
+
+
+
+
 
 
 
@@ -15,12 +21,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ProductoModule,
+    SolicitudModule,
     CoreModule,
     NgbModule
   ],

@@ -5,20 +5,19 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SecurityGuard implements CanActivate {
-
+export class LoginGuard implements CanActivate {
   constructor(private router: Router) { }
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (window.sessionStorage.get('tokenUser')){
 
-    if (sessionStorage.length !== 0 && sessionStorage.get('tokenUser') !== null){
-
-      return true;
+      this.router.navigate(['/home']);
+      return false;
 
     } else {
 
-      this.router.navigate(['/login']);
-      return false;
+      return true;
+
     }
   }
 
