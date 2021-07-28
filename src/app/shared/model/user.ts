@@ -1,16 +1,16 @@
 export interface User {
-    id: string;
+    id: string | number;
     name: string;
-    lastName: string;
+    last_name: string;
     document: string;
     nit: string;
     email: string;
     status: string;
     type: string;
     password: string;
-    createdAt: string;
-    updateAt: string;
-    deletedAt: string;
+    created_at: string;
+    update_at: string;
+    deleted_at: string;
 
 
 }
