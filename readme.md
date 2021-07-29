@@ -40,3 +40,8 @@ Despu&eacute;s de importar el proyecto se muestra de la siguiente manera
 
 
 Hash de git relacionado: 01a59693
+
+
+## run json-server 
+
+json-server --watch db.json --middlewares login-middleware.js
