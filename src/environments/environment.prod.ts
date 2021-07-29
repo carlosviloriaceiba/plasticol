@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  endpoint: '/prospectos-vida'
+  endpoint: '/prospectos-vida',
+  session_key: 'user_app'
 };
