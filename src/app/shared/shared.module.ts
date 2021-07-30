@@ -7,6 +7,8 @@ import { MensajeErrorCamposContenedorDirective } from './directivas/error-campos
 import { ErrorCamposPlantillaComponent } from './directivas/error-campos/componente/error-campos-plantilla.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TrackByPipe } from './pipe/track-by.pipe';
+import { TrmComponent } from './components/trm/trm.component';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import { TrackByPipe } from './pipe/track-by.pipe';
     MensajeErrorCamposDirective,
     MensajeErrorCamposContenedorDirective,
     MensajeErrorCamposSubmitDirective,
-    TrackByPipe
+    TrackByPipe,
+    TrmComponent
   ],
   imports: [ReactiveFormsModule, FormsModule],
   exports: [

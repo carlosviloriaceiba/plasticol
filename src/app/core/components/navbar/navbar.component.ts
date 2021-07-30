@@ -1,40 +1,47 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from '@core/modelo/menu-item';
+import { Session } from '@shared/model/session';
+import { AuthenticateService } from '@shared/service/authenticate.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: 'navbar.component.html',
-  styles: [`:host {
-    border: 0 solid #e1e1e1;
-    border-bottom-width: 1px;
-    display: block;
-    height: 48px;
-    padding: 0 16px;
-  }
-
-  nav a {
-    color: #8f8f8f;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 48px;
-    margin-right: 20px;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-  }
-
-  nav a.router-link-active {
-    color: #106cc8;
-  }`],
+  styles: [`
+  .dropdown , .dropdown > .nav-link {
+      cursor:pointer;
+    }
+  `],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
   @Input()
   items: MenuItem[];
+  user: string;
+  public isMenuCollapsed = true;
+  currentUser: Session;
+  currentUserSubscription: Subscription;
 
-  constructor() { }
+  constructor(private router: Router,
+              private authenticationService: AuthenticateService
+              ){
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
+
 
   ngOnInit() {
   }
 
+
+  logout(){
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  ngOnDestroy() {
+    this.currentUserSubscription.unsubscribe();
+  }
 }

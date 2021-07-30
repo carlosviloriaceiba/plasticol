@@ -9,12 +9,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpService } from './services/http.service';
 import { ManejadorError } from './interceptor/manejador-error';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [ToolbarComponent, NavbarComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   exports: [ToolbarComponent, NavbarComponent],
   providers: [

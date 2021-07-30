@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SolicitudModule } from '@solicitud/solicitud.module';
 import { LoginComponent } from '@login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -30,7 +31,8 @@ import { LoginComponent } from '@login/login.component';
     ProductoModule,
     SolicitudModule,
     CoreModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [CookieService],
     bootstrap: [AppComponent],
