@@ -16,7 +16,6 @@ export class TrmComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('trm works', this.currentTrm);
   }
 
 }

@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
+import { HomeComponent } from '@home/home.component';
+import { TrmComponent } from '@shared/components/trm/trm.component';
 import { AuthenticateService } from '@shared/service/authenticate.service';
 import { of } from 'rxjs/internal/observable/of';
 
@@ -14,7 +16,7 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let authenticateService: AuthenticateService;
-  // let router: Router;
+  let router: Router;
 
   const usuario = {
     sessionToken: '123EFXEX235',
@@ -35,17 +37,20 @@ describe('LoginComponent', () => {
   };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
+      declarations: [ LoginComponent, TrmComponent ],
       imports: [
             CommonModule,
             HttpClientModule,
-            RouterTestingModule,
+            RouterTestingModule.withRoutes([
+              { path: 'home', component: HomeComponent },
+            ]),
             ReactiveFormsModule,
 
       ],
       providers: [AuthenticateService, HttpService, FormBuilder]
     })
     .compileComponents();
+
   });
 
   beforeEach(waitForAsync(() => {
@@ -53,12 +58,10 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     authenticateService = TestBed.inject(AuthenticateService);
-    // router = TestBed.inject(Router);
+    router = TestBed.inject(Router);
 
     fixture.detectChanges();
-/*     spyOn(authenticateService, 'login').and.returnValue(
-      of(usuario)
-      ); */
+
   }));
 
 
@@ -74,11 +77,14 @@ describe('LoginComponent', () => {
   }));
 
   it('deberia cambiar enviado al hacer login ',  waitForAsync(() => {
-    component.login();
+
     spyOn(authenticateService, 'login').and.returnValue(
       of(usuario)
       );
-    fixture.detectChanges();
+    component.loginForm.controls[`username`].setValue('admin@sofyplastic.com');
+    component.loginForm.controls[`password`].setValue('user1');
+    component.login();
+
     expect(component.enviado).toBeTrue();
 
   }));
@@ -86,27 +92,41 @@ describe('LoginComponent', () => {
   it('deberia obtener credenciales del', waitForAsync(() => {
 
 
-    spyOn(authenticateService, 'login').and.callThrough();
+    spyOn(authenticateService, 'login').and.returnValue(
+      of(usuario)
+      );
 
-
+    component.loginForm.controls[`username`].setValue('admin@sofyplastic.com');
+    component.loginForm.controls[`password`].setValue('user1');
     component.login();
+
     expect(authenticateService.login).toHaveBeenCalled();
-   /*  component.login();
-    fixture.detectChanges();
-    expect(authenticateService.login).toHaveBeenCalled(); */
 
   }));
 
 
-/*   it('chequear usuario no autenticado redirect login route', waitForAsync(() => {
-
-    component.login();
+  it('chequear usuario autenticado redirect home', waitForAsync(() => {
+    spyOn(authenticateService, 'login').and.returnValue(
+      of(usuario)
+    );
     const navigateSpy = spyOn(router, 'navigate');
 
-    //expect(component.redirect()).toHaveBeenCalled();
+    component.loginForm.controls[`username`].setValue('admin@sofyplastic.com');
+    component.loginForm.controls[`password`].setValue('user1');
+
+    component.login();
 
     expect(navigateSpy ).toHaveBeenCalledWith(['/home']);
 
-  })); */
+  }));
+
+  it('chequear redirect function', waitForAsync(() => {
+
+    const redirect = spyOn(component, 'redirect');
+    component.redirect();
+
+    expect(redirect).toHaveBeenCalled();
+
+  }));
 
 });
