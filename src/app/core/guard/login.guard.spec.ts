@@ -28,14 +28,14 @@ describe('LoginGuard', () => {
   });
 
   it('chequear usuario autenticado redirect home route', () => {
-    //spyOn(storageService, 'estaAutenticado').and.returnValue(true);
+    // spyOn(storageService, 'estaAutenticado').and.returnValue(true);
     const navigateSpy = spyOn(router, 'navigate');
     expect(guard.canActivate()).toEqual(false);
     expect(navigateSpy).toHaveBeenCalledWith(['/home']);
   });
 
   it('chequear usuario no autenticado puede acceder login', () => {
-    //spyOn(storageService, 'estaAutenticado').and.returnValue(false);
+    // spyOn(storageService, 'estaAutenticado').and.returnValue(false);
     expect(guard.canActivate()).toBeTrue();
   });
 

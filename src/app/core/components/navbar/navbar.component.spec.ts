@@ -8,12 +8,12 @@ import { NavbarComponent } from './navbar.component';
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
-  let dummySession: Session;
+  // let dummySession: Session;
 
 
   beforeEach(waitForAsync(() => {
     let store = {};
-    dummySession = {
+   /*  dummySession = {
       sessionToken: '123EFXEX235',
       user: {
         id: 1,
@@ -29,7 +29,7 @@ describe('NavbarComponent', () => {
         update_at: '2021-01-01 08:00:59',
         deleted_at: null
       }
-    };
+    }; */
     const mockSessionStorage = {
       getItem: (key: string): string => {
         return key in store ? store[key] : null;
@@ -62,7 +62,7 @@ describe('NavbarComponent', () => {
     spyOn(sessionStorage, 'clear')
       .and.callFake(mockSessionStorage.clear);
 
- 
+
 
   }));
 

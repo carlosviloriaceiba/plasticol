@@ -9,8 +9,8 @@ import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SolicitudModule } from '@solicitud/solicitud.module';
-import { LoginComponent } from '@login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginModule } from '@login/login.module';
 
 
 
@@ -22,14 +22,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ProductoModule,
     SolicitudModule,
+    LoginModule,
     CoreModule,
     NgbModule,
     ReactiveFormsModule

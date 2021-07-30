@@ -5,19 +5,23 @@ import { AuthenticateService } from '@shared/service/authenticate.service';
 
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  enviado = false;
+  public loginForm: FormGroup;
+  public enviado = false;
+
+
   constructor(
     private formBuilder: FormBuilder,
     private authenticateService: AuthenticateService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.construirFormularioLogin();

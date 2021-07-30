@@ -1,0 +1,8 @@
+<ng-container *ngIf="currentTrm">
+    <p class="d-md-block d-none">
+        TRM para hoy es <strong>{{currentTrm[0].valor}} {{currentTrm[0].unidad}}</strong>
+    </p>
+    <p class="d-md-none d-block">
+        TRM <strong>{{currentTrm[0].valor}} {{currentTrm[0].unidad}}</strong>
+    </p>
+</ng-container>

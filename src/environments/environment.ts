@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   endpoint: 'http://localhost:3000',
-  session_key: 'user_app'
+  session_key: 'user_app',
+  token_trm: 'm5qn4biLq36od8jfyzfdafcJw'
 };
 
 /*

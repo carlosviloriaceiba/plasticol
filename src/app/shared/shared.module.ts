@@ -19,7 +19,7 @@ import { TrmComponent } from './components/trm/trm.component';
     TrackByPipe,
     TrmComponent
   ],
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -28,7 +28,8 @@ import { TrmComponent } from './components/trm/trm.component';
     MensajeErrorCamposSubmitDirective,
     ReactiveFormsModule,
     FormsModule,
-    TrackByPipe
+    TrackByPipe,
+    TrmComponent
   ]
 })
 export class SharedModule { }

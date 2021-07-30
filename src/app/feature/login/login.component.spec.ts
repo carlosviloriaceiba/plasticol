@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-//import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { AuthenticateService } from '@shared/service/authenticate.service';
@@ -14,7 +14,7 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let authenticateService: AuthenticateService;
-  //let router: Router;
+  // let router: Router;
 
   const usuario = {
     sessionToken: '123EFXEX235',
@@ -53,7 +53,7 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     authenticateService = TestBed.inject(AuthenticateService);
-    //router = TestBed.inject(Router);
+    // router = TestBed.inject(Router);
 
     fixture.detectChanges();
 /*     spyOn(authenticateService, 'login').and.returnValue(
@@ -94,7 +94,7 @@ describe('LoginComponent', () => {
    /*  component.login();
     fixture.detectChanges();
     expect(authenticateService.login).toHaveBeenCalled(); */
-   
+
   }));
 
 
@@ -102,7 +102,7 @@ describe('LoginComponent', () => {
 
     component.login();
     const navigateSpy = spyOn(router, 'navigate');
-   
+
     //expect(component.redirect()).toHaveBeenCalled();
 
     expect(navigateSpy ).toHaveBeenCalledWith(['/home']);

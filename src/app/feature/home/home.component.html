@@ -1,1 +1,8 @@
-<p>home works!</p>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 >Hola, {{session.user.name |titlecase}} {{session.user.last_name |titlecase}}!</h1>
+        <p>Gracias por preferirnos te invitamos a ver el estado de tus pedidos.</p>
+        <p><a class="btn btn-primary"  role="button" [routerLink]="'/solicitud'">Solicitudes &raquo;</a></p>
+    </div>
+</div>
