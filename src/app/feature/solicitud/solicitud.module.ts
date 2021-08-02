@@ -8,6 +8,7 @@ import { SolicitudService } from './shared/service/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { CrearSolicitudComponent } from './components/crear-solicitud/crear-solicitud.component';
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ListarSolicitudComponent } from './components/listar-solicitud/listar-s
   ],
   imports: [
     SolicitudRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ],
   providers: [SolicitudService]
 })

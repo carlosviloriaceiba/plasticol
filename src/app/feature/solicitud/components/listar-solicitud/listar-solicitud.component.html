@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let solicitud of solicitudes; trackBy: 'id' | trackBy">
+                <tr *ngFor="let solicitud of solicitudes | async; trackBy: 'id' | trackBy">
                     <th scope="row">
                         {{solicitud.id}}
                     </th>

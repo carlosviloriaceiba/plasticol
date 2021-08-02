@@ -5,6 +5,7 @@ import { HttpService, Options } from '@core/services/http.service';
 import { AuthenticateService } from '@shared/service/authenticate.service';
 import { HttpParams } from '@angular/common/http';
 import { Session } from '@shared/model/session';
+import * as moment from 'moment';
 
 @Injectable()
 export class SolicitudService {
@@ -27,6 +28,7 @@ export class SolicitudService {
   }
 
   public guardar(solicitud: Solicitud) {
+    solicitud.day_to_dispatch =  moment(solicitud.day_to_dispatch).format('YYYY-MM-DD HH:mm:ss');
     return this.httpService.doPost<Solicitud, boolean>(`${environment.endpoint}/requests`, solicitud,
                                                 this.httpService.optsName('crear/actualizar solicitudes'));
   }

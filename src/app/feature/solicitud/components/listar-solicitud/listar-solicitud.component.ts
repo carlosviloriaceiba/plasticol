@@ -4,6 +4,7 @@ import { Solicitud } from '@solicitud/shared/model/solicitud';
 import { SolicitudService } from '@solicitud/shared/service/solicitud.service';
 import swal from 'sweetalert2';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-listar-solicitud',
@@ -11,16 +12,14 @@ import * as moment from 'moment';
   styleUrls: ['./listar-solicitud.component.scss']
 })
 export class ListarSolicitudComponent implements OnInit {
-  public solicitudes: Solicitud[];
+  public solicitudes: Observable<Solicitud[]>;
   public faPencilAlt = faPencilAlt;
   public faTrashAlt = faTrashAlt;
   public faEye = faEye;
   constructor(private solicitudService: SolicitudService) { }
 
   ngOnInit(): void {
-     this.solicitudService.consultar().subscribe((solicitudes) => {
-      this.solicitudes = solicitudes;
-    });
+     this.solicitudes = this.solicitudService.consultar();
   }
 
   checkEliminar(solicitud: Solicitud){

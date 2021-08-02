@@ -1,1 +1,81 @@
-<p>crear-solicitud works!</p>
+
+<!-- <pre>
+    {{formSolicitud.value|json}}
+</pre> -->
+<div class="container col-md-8">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="mb-0"><strong>Solicitudes</strong></h3>
+        </div>
+        <div class="card-body">
+            <p class="form-text text-muted mb-2">Aqui prodras registrar tus pedidos de materia prima que hacen parte de nuestro stock de productos.</p>
+            <form [formGroup]="formSolicitud" (ngSubmit)="crearSolicitud()">
+                <div class="form-group col-md-4 pl-0">
+                    <label for="productosSelect">Dia de entrega</label>
+                    <div class="input-group">
+                        <input formControlName="day_to_dispatch" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [markDisabled]="markDisabled" [minDate]="minDate" [ngClass]="{ 'is-invalid': enviado && f.day_to_dispatch.errors }">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
+                                <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="productosSelect">Producto</label>
+                        <select class="form-control" id="productosSelect" formControlName="productId" [ngClass]="{ 'is-invalid': enviado && f.productId.errors }">
+                            <option value="">Seleccione</option>
+                            <option *ngFor="let producto of baseProductos" value="{{producto.id}}">{{producto.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="material_count">Cantidad</label>
+                        <input formControlName="material_count" type="number" class="form-control" id="material_count" placeholder="Cantidad" [ngClass]="{ 'is-invalid': enviado && f.material_count.errors }">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="materialUnits">Unidad pedido</label>
+                        <select formControlName="material_unit" class="form-control" id="materialUnits" [ngClass]="{ 'is-invalid': enviado && f.material_unit.errors }">
+                            <option value="">Seleccione</option>
+                            <option *ngFor="let unit of units" value="{{unit.value}}">{{unit.label}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <small class="form-text text-muted">
+                   <em>
+                    Para completar tu solicitud debes indicar los datos basicos de tu pedido.
+                   </em>
+                </small>
+                <hr class="mb-2">
+
+                <div class="form-row" *ngIf="!showExtras()">
+                    <div class="form-group col-md-4">
+                        <label for="city">Ciudades</label>
+                        <select formControlName="city" class="form-control" id="city" [ngClass]="{ 'is-invalid': enviado && f.city.errors }">
+                            <option value="">Seleccione</option>
+                            <option *ngFor="let ciudad of ciudades" value="{{ciudad.value}}">{{ciudad.label}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="address">Dirección</label>
+                        <input type="text" maxlength="255" formControlName="address" id="address" class="form-control" [ngClass]="{ 'is-invalid': enviado && f.address.errors }" />
+                    </div>
+                </div>
+                <div class="form-row" *ngIf="!showExtras()">
+                    <div class="form-group col-md-6">
+                        <label for="contact_person">Persona contacto</label>
+                        <input type="text" maxlength="255" formControlName="contact_person" id="contact_person" class="form-control" [ngClass]="{ 'is-invalid': enviado && f.contact_person.errors }"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="contact_number">Número contacto</label>
+                        <input type="text" maxlength="255" formControlName="contact_number" id="contact_number" class="form-control" [ngClass]="{ 'is-invalid': enviado && f.contact_number.errors }"/>
+                    </div>
+                </div>
+                <button  type="submit" class="btn btn-success btn-lg float-right">Sign in</button>
+            </form>
+        </div>
+    </div>
+
+</div>

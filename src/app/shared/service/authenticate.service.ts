@@ -31,7 +31,7 @@ export class AuthenticateService {
     }));
   }
 
-  logout() {
+  public logout() {
     sessionStorage.removeItem(environment.session_key);
     this.currentUserSubject.next(null);
   }

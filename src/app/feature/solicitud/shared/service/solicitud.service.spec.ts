@@ -41,10 +41,10 @@ describe('SolicitudService', () => {
         material_unit: 'Ton',
         contact_person: 'Carlos Viloria',
         contact_number: '3003003030',
-        day_to_ispatch:  '2021-08-01 08:00:00',
+        day_to_dispatch:  '2021-08-01 08:00:00',
         created_at:  '2021-07-01 08:00:00',
         update_at:  '2021-07-01 08:00:00',
-        delete_at: null,
+        deleted_at: null,
         userId: 1,
       },
       {
@@ -56,10 +56,10 @@ describe('SolicitudService', () => {
         material_unit: 'KG',
         contact_person: 'Viviana Villa',
         contact_number: '3003003131',
-        day_to_ispatch:  '2021-09-11 08:00:00',
+        day_to_dispatch:  '2021-09-11 08:00:00',
         created_at:  '2021-07-01 08:00:00',
         update_at:  '2021-07-01 08:00:00',
-        delete_at: null,
+        deleted_at: null,
         userId: 1,
       },
 
@@ -85,10 +85,10 @@ describe('SolicitudService', () => {
       material_unit: 'Ton',
       contact_person: 'Carlos Viloria',
       contact_number: '3003003030',
-      day_to_ispatch:  '2021-08-01 08:00:00',
+      day_to_dispatch:  '2021-08-01 08:00:00',
       created_at:  '2021-07-01 08:00:00',
       update_at:  '2021-07-01 08:00:00',
-      delete_at: null,
+      deleted_at: null,
       userId: 1,
     };
     service.guardar(dummySolicitud).subscribe((respuesta) => {
@@ -109,10 +109,10 @@ describe('SolicitudService', () => {
       material_unit: 'Ton',
       contact_person: 'Carlos Viloria',
       contact_number: '3003003030',
-      day_to_ispatch:  '2021-08-01 08:00:00',
+      day_to_dispatch:  '2021-08-01 08:00:00',
       created_at:  '2021-07-01 08:00:00',
       update_at:  '2021-07-01 08:00:00',
-      delete_at: null,
+      deleted_at: null,
       userId: 1,
     };
     service.eliminar(dummyProducto).subscribe((respuesta) => {

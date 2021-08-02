@@ -13,7 +13,7 @@ export interface Solicitud {
     material_unit: string;
     contact_person: string;
     contact_number: string;
-    day_to_ispatch: string;
+    day_to_dispatch: string;
     created_at: string;
     update_at: string;
     deleted_at: string;
