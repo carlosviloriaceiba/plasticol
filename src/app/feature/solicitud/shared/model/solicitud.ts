@@ -16,8 +16,9 @@ export interface Solicitud {
     day_to_ispatch: string;
     created_at: string;
     update_at: string;
-    delete_at: string;
+    deleted_at: string;
     userId: number;
     user?: User;
+    status?: string;
 
 }

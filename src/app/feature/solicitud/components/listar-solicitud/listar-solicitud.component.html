@@ -1,0 +1,60 @@
+
+<div class="container mt-3">
+    <div class="table-responsive">
+
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" class="d-none d-md-table-cell">Ciudad</th>
+                    <th scope="col">Dia entrega</th>
+                    <th scope="col" class="text-center">Cantidad Pedido</th>
+                    <th scope="col" class="d-none d-md-table-cell">Producto</th>
+                    <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let solicitud of solicitudes; trackBy: 'id' | trackBy">
+                    <th scope="row">
+                        {{solicitud.id}}
+                    </th>
+                    <td class=" d-none  d-md-table-cell">
+                        {{solicitud.city}}
+                    </td>
+                    <td>
+                        {{solicitud.day_to_dispatch | date:'y/MM/dd'}}                        
+                    </td>
+                    <td class="text-center">
+                        {{solicitud.material_count}} {{solicitud.material_unit}}
+                    </td>
+                    <td class="d-none  d-md-table-cell">
+                        <ng-container *ngIf="solicitud.product && solicitud.product.name">
+                            {{solicitud.product.name}}
+                        </ng-container>
+                    </td>
+                    <td  class="text-center">
+                        <ng-container *ngIf="solicitud.status=='deleted'">
+                            <span class="badge badge-danger p-2">Borrada</span>
+                        </ng-container>
+                        <ng-container *ngIf="solicitud.status=='cancel'">
+                            <span class="badge badge-info p-2">Cancelada</span>
+                        </ng-container>
+                        <ng-container *ngIf="solicitud.status=='delivered'">
+                            <span class="badge badge-success p-2">Entregada</span>
+                        </ng-container>
+                    </td>
+                    <td class="text-center">
+                        <fa-icon [icon]="faEye" class="p-2" placement="top" ngbTooltip="Ver"></fa-icon>
+                        <fa-icon [icon]="faPencilAlt" class="p-2" placement="top" ngbTooltip="Editar"
+                            *ngIf="!solicitud.deleted_at && solicitud.status!=='delivered'"></fa-icon>
+                        <fa-icon [icon]="faTrashAlt" class="p-2" placement="top" ngbTooltip="Eliminar/Cancelar"
+                            (click)="checkEliminar(solicitud)" *ngIf="!solicitud.deleted_at && solicitud.status!=='delivered'"></fa-icon>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

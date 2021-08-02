@@ -8,6 +8,7 @@ import { ErrorCamposPlantillaComponent } from './directivas/error-campos/compone
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TrackByPipe } from './pipe/track-by.pipe';
 import { TrmComponent } from './components/trm/trm.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -19,7 +20,11 @@ import { TrmComponent } from './components/trm/trm.component';
     TrackByPipe,
     TrmComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule,
+            ReactiveFormsModule,
+            FormsModule,
+            FontAwesomeModule
+  ],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -29,7 +34,8 @@ import { TrmComponent } from './components/trm/trm.component';
     ReactiveFormsModule,
     FormsModule,
     TrackByPipe,
-    TrmComponent
+    TrmComponent,
+    FontAwesomeModule
   ]
 })
 export class SharedModule { }

@@ -7,12 +7,14 @@ import { SolicitudComponent } from './components/solicitud/solicitud.component';
 import { SolicitudService } from './shared/service/solicitud.service';
 import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { CrearSolicitudComponent } from './components/crear-solicitud/crear-solicitud.component';
+import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
 
 
 @NgModule({
   declarations: [
     SolicitudComponent,
-    CrearSolicitudComponent
+    CrearSolicitudComponent,
+    ListarSolicitudComponent
   ],
   imports: [
     SolicitudRoutingModule,

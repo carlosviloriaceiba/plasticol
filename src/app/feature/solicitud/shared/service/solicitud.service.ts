@@ -1,24 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Solicitud } from 'src/app/feature/solicitud/shared/model/solicitud';
 import { environment } from 'src/environments/environment';
-import { HttpService } from '@core/services/http.service';
+import { HttpService, Options } from '@core/services/http.service';
+import { AuthenticateService } from '@shared/service/authenticate.service';
+import { HttpParams } from '@angular/common/http';
+import { Session } from '@shared/model/session';
 
 @Injectable()
 export class SolicitudService {
   solicitudes: Solicitud [];
-  constructor(private httpService: HttpService) { }
+  private currentUser: Session;
+  constructor(private httpService: HttpService,
+              private authenticateService: AuthenticateService,
+    ) {
+    this.currentUser = this.authenticateService.currentUserValue;
+   }
 
   public consultar() {
-    return this.httpService.doGet<Solicitud[]>(`${environment.endpoint}/requests`, this.httpService.optsName('consultar solicitudes'));
+    const opts: Options = {
+      params: new HttpParams()
+      .set('userId', this.currentUser.user.id.toString())
+      .set('_sort', 'day_to_dispatch')
+      .set('_order', 'desc')
+    };
+    return this.httpService.doGet<Solicitud[]>(`${environment.endpoint}/requests`, opts);
   }
 
-  public guardar(producto: Solicitud) {
-    return this.httpService.doPost<Solicitud, boolean>(`${environment.endpoint}/requests`, producto,
+  public guardar(solicitud: Solicitud) {
+    return this.httpService.doPost<Solicitud, boolean>(`${environment.endpoint}/requests`, solicitud,
                                                 this.httpService.optsName('crear/actualizar solicitudes'));
   }
 
-  public eliminar(producto: Solicitud) {
-    return this.httpService.doDelete<boolean>(`${environment.endpoint}/requests/${producto.id}`,
+  public actualizar(solicitud: Solicitud) {
+    return this.httpService.doPut<Solicitud, boolean>(`${environment.endpoint}/requests/${solicitud.id}`, solicitud,
+                                                this.httpService.optsName('crear/actualizar solicitudes'));
+  }
+
+  public eliminar(solicitud: Solicitud) {
+    return this.httpService.doDelete<boolean>(`${environment.endpoint}/requests/${solicitud.id}`,
                                                  this.httpService.optsName('eliminar solicitudes'));
   }
 }

@@ -1,6 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { AuthenticateService } from '@shared/service/authenticate.service';
 import { environment } from 'src/environments/environment';
 import { HttpService } from '../../../../core/services/http.service';
 import { Solicitud } from '../model/solicitud';
@@ -16,7 +17,7 @@ describe('SolicitudService', () => {
 
     const injector = TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [SolicitudService, HttpService]
+      providers: [SolicitudService, HttpService, AuthenticateService]
     });
     httpMock = injector.inject(HttpTestingController);
     service = TestBed.inject(SolicitudService);
