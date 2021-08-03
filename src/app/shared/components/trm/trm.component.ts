@@ -16,6 +16,11 @@ export class TrmComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.currentTrm) {
+      this.trmService.mostrarTrm().subscribe(() => {
+        this.currentTrm = this.trmService.currenTrmValue;
+      });
+    }
   }
 
 }
