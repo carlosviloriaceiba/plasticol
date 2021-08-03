@@ -45,11 +45,28 @@
                         </ng-container>
                     </td>
                     <td class="text-center">
-                        <fa-icon [icon]="faEye" class="p-2" placement="top" ngbTooltip="Ver"></fa-icon>
-                        <fa-icon [icon]="faPencilAlt" class="p-2" placement="top" ngbTooltip="Editar"
-                            *ngIf="!solicitud.deleted_at && solicitud.status!=='delivered'"></fa-icon>
-                        <fa-icon [icon]="faTrashAlt" class="p-2" placement="top" ngbTooltip="Eliminar/Cancelar"
-                            (click)="checkEliminar(solicitud)" *ngIf="!solicitud.deleted_at && solicitud.status!=='delivered'"></fa-icon>
+                        <fa-icon 
+                            [icon]="faEye" 
+                            class="p-2" 
+                            placement="top"
+                            ngbTooltip="Ver">
+                        </fa-icon>
+                        <fa-icon 
+                            [icon]="faBan"
+                            class="p-2"
+                            placement="top"
+                            ngbTooltip="Cancelar"
+                            *ngIf="!solicitud.deleted_at && (solicitud.status!=='delivered' && solicitud.status!=='cancel' )" 
+                            (click)="cancelar(solicitud)">
+                        </fa-icon>
+                        <fa-icon 
+                            [icon]="faTrashAlt" 
+                            class="p-2" 
+                            placement="top" 
+                            ngbTooltip="Eliminar"
+                            (click)="checkEliminar(solicitud)" 
+                            *ngIf="!solicitud.deleted_at && solicitud.status!=='delivered'">
+                        </fa-icon>
                     </td>
                 </tr>
 
