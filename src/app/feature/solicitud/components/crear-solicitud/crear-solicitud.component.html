@@ -1,20 +1,17 @@
 
-<!-- <pre>
-    {{formSolicitud.value|json}}
-</pre> -->
-<div class="container col-md-8">
+<div class="container col-md-8 mt-1">
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-dark">
             <h3 class="mb-0"><strong>Solicitudes</strong></h3>
         </div>
         <div class="card-body">
             <p class="form-text text-muted mb-2">Aqui prodras registrar tus pedidos de materia prima que hacen parte de nuestro stock de productos.</p>
-            <form [formGroup]="formSolicitud" (ngSubmit)="crearSolicitud()">
+            <form [formGroup]="formSolicitud" (ngSubmit)="crearSolicitud()" autocomplete="off">
                 <div class="form-group col-md-4 pl-0">
                     <label for="productosSelect">Dia de entrega</label>
                     <div class="input-group">
-                        <input formControlName="day_to_dispatch" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [markDisabled]="markDisabled" [minDate]="minDate" [ngClass]="{ 'is-invalid': enviado && f.day_to_dispatch.errors }">
+                        <input formControlName="day_to_dispatch" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [markDisabled]="markDisabled" [minDate]="minDate" [ngClass]="{ 'is-invalid': enviado && f.day_to_dispatch.errors }" (click)="d.toggle()" (dateSelect)="esFestivo($event)" readOnly="true">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button">
                                 <fa-icon [icon]="faCalendarAlt"></fa-icon>
@@ -42,7 +39,12 @@
                         </select>
                     </div>
                 </div>
-                
+
+                <div class="row" *ngIf="totalPedido > 0">
+                    <div class="col">
+                        <p> <strong>Tu solicitud tiene un costo de {{totalPedido | number : '1.2-2'}} $</strong></p>
+                    </div>
+                </div>
                 <small class="form-text text-muted">
                    <em>
                     Para completar tu solicitud debes indicar los datos basicos de tu pedido.
@@ -73,7 +75,7 @@
                         <input type="text" maxlength="255" formControlName="contact_number" id="contact_number" class="form-control" [ngClass]="{ 'is-invalid': enviado && f.contact_number.errors }"/>
                     </div>
                 </div>
-                <button  type="submit" class="btn btn-success btn-lg float-right">Sign in</button>
+                <button  type="submit" class="btn btn-success btn-lg float-right">Enviar</button>
             </form>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 
 import { SharedModule } from '@shared/shared.module';
@@ -9,7 +9,10 @@ import { SolicitudRoutingModule } from './solicitud-routing.module';
 import { CrearSolicitudComponent } from './components/crear-solicitud/crear-solicitud.component';
 import { ListarSolicitudComponent } from './components/listar-solicitud/listar-solicitud.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import localeEsCo from '@angular/common/locales/es-CO';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localeEsCo, 'es-CO');
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     NgbModule
   ],
-  providers: [SolicitudService]
+  providers: [SolicitudService,
+    { provide: LOCALE_ID, useValue: 'es-CO' }
+  ]
 })
 export class SolicitudModule { }

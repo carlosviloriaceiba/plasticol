@@ -6,6 +6,7 @@ import { AuthenticateService } from '@shared/service/authenticate.service';
 import { HttpParams } from '@angular/common/http';
 import { Session } from '@shared/model/session';
 import * as moment from 'moment';
+import { Producto } from '@shared/model/producto';
 
 @Injectable()
 export class SolicitudService {
@@ -28,7 +29,9 @@ export class SolicitudService {
   }
 
   public guardar(solicitud: Solicitud) {
-    solicitud.day_to_dispatch =  moment(solicitud.day_to_dispatch).format('YYYY-MM-DD HH:mm:ss');
+    const dateTemporal = Object.assign({}, solicitud.day_to_dispatch);
+    dateTemporal[`month`] = dateTemporal[`month`] - 1;
+    solicitud.day_to_dispatch =  moment(dateTemporal).format('YYYY-MM-DD HH:mm:ss');
     return this.httpService.doPost<Solicitud, boolean>(`${environment.endpoint}/requests`, solicitud,
                                                 this.httpService.optsName('crear/actualizar solicitudes'));
   }
@@ -41,5 +44,23 @@ export class SolicitudService {
   public eliminar(solicitud: Solicitud) {
     return this.httpService.doDelete<boolean>(`${environment.endpoint}/requests/${solicitud.id}`,
                                                  this.httpService.optsName('eliminar solicitudes'));
+  }
+
+  public getPrice(producto: Producto, cantidad: number, unidad: string){
+    const units = {
+      Ton: 'Ton',
+      KG: 'KG'
+    };
+    let result = null;
+    if (cantidad && cantidad > 0){
+      if (units[unidad] === 'Ton'){
+        result = (cantidad / 0.0010000) * producto.price;
+      }else {
+        result = cantidad  * producto.price;
+      }
+
+    }
+
+    return result;
   }
 }

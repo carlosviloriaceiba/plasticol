@@ -20,5 +20,6 @@ export interface Solicitud {
     userId: number;
     user?: User;
     status?: string;
+    total_price?: string;
 
 }

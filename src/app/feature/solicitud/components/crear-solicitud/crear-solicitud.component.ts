@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { ProductoService } from '@shared/service/producto.service';
 import { FestivosService } from '@shared/service/festivos.service';
 import { Producto } from '@shared/model/producto';
@@ -9,14 +9,14 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { SolicitudService } from '@solicitud/shared/service/solicitud.service';
 import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-solicitud',
   templateUrl: './crear-solicitud.component.html',
   styleUrls: ['./crear-solicitud.component.scss']
 })
-export class CrearSolicitudComponent implements OnInit {
+export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
   public enviado = false;
   public baseProductos: Producto[];
   public ciudades = [
@@ -39,6 +39,9 @@ export class CrearSolicitudComponent implements OnInit {
     month: new Date().getMonth() + 1,
     day: new Date().getDate() + 2
   };
+  public totalPedido = 0;
+  public recargo = false;
+
   constructor(private festivosService: FestivosService,
               private productoService: ProductoService,
               private formBuilder: FormBuilder,
@@ -50,9 +53,11 @@ export class CrearSolicitudComponent implements OnInit {
     ) {
       this.currentUser = this.authenticateService.currentUserValue;
       this.markDisabled =  (date: NgbDate) => this.calendar.getWeekday(date) >= 6;
-      console.log(this.festivosService.consultar(new Date().getFullYear()));
    }
 
+  ngAfterContentChecked(): void {
+    this.calcularPrecio();
+  }
   ngOnInit(): void {
     this.formSolicitud = this.formBuilder.group({
       day_to_dispatch: ['', Validators.required],
@@ -65,19 +70,19 @@ export class CrearSolicitudComponent implements OnInit {
       product: [''],
       productId: ['', Validators.required],
       userId: [this.currentUser.user.id, Validators.required],
-      user: [this.currentUser.user, Validators.required]
+      user: [this.currentUser.user, Validators.required],
+      total_price: [''],
     });
 
     this.formSolicitud.get('productId').valueChanges.subscribe( (val) => {
-
       if (val){
         const value = this.productoService.returnProductoById(this.baseProductos, val);
-        console.log(value);
         this.formSolicitud.get('product').setValue(value);
       }else{
         this.formSolicitud.get('product').setValue('');
       }
     });
+
     this.setupProductos();
   }
   get f() { return this.formSolicitud.controls; }
@@ -87,7 +92,42 @@ export class CrearSolicitudComponent implements OnInit {
       this.baseProductos = productos;
     });
   }
+  calcularPrecio(){
+    const unidad = this.formSolicitud.get('material_unit').value;
+    const producto = this.formSolicitud.get('product').value;
+    const cantidad = this.formSolicitud.get('material_count').value;
 
+    if (unidad && producto !== '' &&  cantidad !== ''){
+
+      const value = this.solicitudService.getPrice(producto, cantidad, unidad);
+      this.totalPedido = value;
+      if ( this.recargo) {
+        this.totalPedido = this.totalPedido + (this.totalPedido * 0.10);
+
+      }
+    }else{
+      this.totalPedido = 0;
+    }
+    this.formSolicitud.get('total_price').setValue(this.totalPedido);
+  }
+
+  esFestivo(data: NgbDate){
+    const festivo = this.festivosService.consultar(data);
+    if (festivo){
+      this.recargo = true;
+      swal.fire({
+        title: 'Recargo Servicio',
+        text: `Por seleccionar un dia festivo tienes un recargo de 10% en tu pedido!`,
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Ok'
+      });
+    } else {
+      this.recargo = false;
+    }
+    this.calcularPrecio();
+  }
 
   showExtras(){
    return  (this.f.day_to_dispatch.status === 'INVALID' ||
