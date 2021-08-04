@@ -3,6 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticateService } from '@shared/service/authenticate.service';
 
 
@@ -22,7 +23,8 @@ describe('NavbarComponent', () => {
       declarations: [ NavbarComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
+        NgbModule
       ],
       providers: [AuthenticateService, HttpService ]
     })

@@ -9,6 +9,6 @@ export class SummaryService {
   constructor(private httpService: HttpService) { }
 
   public consultarSummary() {
-    return this.httpService.doGet<Summary>(`${environment.endpoint}/summary`, this.httpService.optsName('consultar sumario'));
+    return this.httpService.doGet<Summary[]>(`${environment.endpoint}/summary`, this.httpService.optsName('consultar sumario'));
   }
 }

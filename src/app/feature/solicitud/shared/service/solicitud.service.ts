@@ -11,7 +11,7 @@ import { Producto } from '@shared/model/producto';
 @Injectable()
 export class SolicitudService {
   solicitudes: Solicitud [];
-  private currentUser: Session;
+  public currentUser: Session;
   constructor(private httpService: HttpService,
               private authenticateService: AuthenticateService,
     ) {

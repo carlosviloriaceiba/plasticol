@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { SolicitudComponent } from './solicitud.component';
 
@@ -8,7 +10,10 @@ describe('SolicitudComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SolicitudComponent ]
+      declarations: [ SolicitudComponent ],
+      imports: [RouterTestingModule,
+                FontAwesomeModule
+      ],
     })
     .compileComponents();
   });

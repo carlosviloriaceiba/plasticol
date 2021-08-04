@@ -25,14 +25,14 @@ describe('SummaryService', () => {
   });
 
   it('obtener sumario', () => {
-    const dummySummary: Summary = {
-      request_ton: 25,
-      pending_ton: 10,
-      percentage_success_request: 85
-    };
 
-    service.consultarSummary().subscribe(sumario => {
-      expect(sumario[`request_ton`]).toBe(25);
+    const dummySummary: Summary[] = [{
+      label: 'Toneladas Solicitadas',
+      value:  25
+    }];
+
+    service.consultarSummary().subscribe((sumario) => {
+      expect(sumario[0][`value`]).toBe(25);
       expect(sumario).toEqual(dummySummary);
     });
     const req = httpMock.expectOne(apiEndpointSolicitudSummary);

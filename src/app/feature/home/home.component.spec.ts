@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { AuthenticateService } from '@shared/service/authenticate.service';
 
@@ -29,7 +30,9 @@ describe('HomeComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
-      imports: [HttpClientModule],
+      imports: [HttpClientModule,
+        RouterTestingModule
+      ],
       providers: [AuthenticateService, HttpService]
     })
     .compileComponents();

@@ -11,8 +11,25 @@ import { SolicitudService } from './solicitud.service';
 describe('SolicitudService', () => {
   let httpMock: HttpTestingController;
   let service: SolicitudService;
+  let authenticateService: AuthenticateService;
   const apiEndpointSolicitudConsulta = `${environment.endpoint}/requests`;
-
+  const usuario = {
+    sessionToken: '123EFXEX235',
+    user: {
+      id: 1,
+      name: 'SOFY',
+      last_name: 'PLASTIC',
+      document: '112000000',
+      nit: 'N900517190',
+      email: 'admin@sofyplastic.com',
+      status: 'active',
+      type: 'client',
+      password: 'user1',
+      created_at: '2021-01-01 08:00:59',
+      update_at: '2021-01-01 08:00:59',
+      deleted_at: null
+    }
+  };
   beforeEach(() => {
 
     const injector = TestBed.configureTestingModule({
@@ -21,17 +38,20 @@ describe('SolicitudService', () => {
     });
     httpMock = injector.inject(HttpTestingController);
     service = TestBed.inject(SolicitudService);
+    authenticateService = TestBed.inject(AuthenticateService);
+    spyOnProperty(authenticateService, 'currentUserValue', 'get').and.returnValue(usuario);
 
   });
 
   it('should be created', () => {
-    const solicitudService: SolicitudService = TestBed.inject(SolicitudService);
-    expect(solicitudService).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 
   it('listar solicitudes', () => {
-    const dummySolicitud: Solicitud[] =  [
 
+    service.currentUser = authenticateService.currentUserValue;
+
+    const dummySolicitud: Solicitud[] =  [
       {
         id: 1,
         city: 'Bogota',
@@ -61,16 +81,15 @@ describe('SolicitudService', () => {
         update_at:  '2021-07-01 08:00:00',
         deleted_at: null,
         userId: 1,
-      },
-
-
-
+      }
     ];
+
     service.consultar().subscribe(solicitudes => {
       expect(solicitudes.length).toBe(2);
       expect(solicitudes).toEqual(dummySolicitud);
     });
-    const req = httpMock.expectOne(apiEndpointSolicitudConsulta);
+    const url = `${apiEndpointSolicitudConsulta}?userId=${service.currentUser.user.id}&_sort=day_to_dispatch&_order=desc`;
+    const req = httpMock.expectOne(url);
     expect(req.request.method).toBe('GET');
     req.flush(dummySolicitud);
   });
