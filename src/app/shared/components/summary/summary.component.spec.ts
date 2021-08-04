@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpService } from '@core/services/http.service';
+import { SummaryService } from '@shared/service/summary.service';
 
 import { SummaryComponent } from './summary.component';
 
@@ -8,7 +11,11 @@ describe('SummaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SummaryComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [ SummaryComponent ],
+      providers: [SummaryService,
+        HttpService,
+      ]
     })
     .compileComponents();
   });
