@@ -1,0 +1,19 @@
+
+<div class="d-md-flex justify-content-between">
+    <ng-container *ngFor="let summary of summarys | async" >
+        <circle-progress
+        [percent]="summary.value"
+        [showTitle]="summary && summary.label"
+        [subtitle]="summary && summary.label ? summary.label:''"         
+        [outerStrokeWidth]="16"
+        [innerStrokeWidth]="8"
+        [outerStrokeColor]="'#78C000'"
+        [innerStrokeColor]="'#C7E596'"
+        [animation]="true"
+        [animationDuration]="300"
+        [radius]="70"
+        [toFixed]="2"
+      ></circle-progress>
+    </ng-container>
+
+</div>
