@@ -6,7 +6,7 @@ import { TrmService } from '@shared/service/trm.service';
 @Component({
   selector: 'app-trm',
   templateUrl: './trm.component.html',
-  styleUrls: ['./trm.component.scss']
+  styleUrls: []
 })
 export class TrmComponent implements OnInit {
   currentTrm: Trm;

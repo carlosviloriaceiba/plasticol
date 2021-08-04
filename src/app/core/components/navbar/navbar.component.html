@@ -8,13 +8,13 @@
           <ul class="navbar-nav ml-auto" *ngIf="currentUser">
              
               <li class="nav-item " *ngFor="let item of items" >
-                  <a class="nav-link " [routerLink]="item.url" routerLinkActive="active"><i class="fa fa-th-list "></i>{{item.nombre}}</a>
+                  <a class="nav-link " [routerLink]="item.url" routerLinkActive="active">{{item.nombre}}</a>
               </li>
 
              
               <li class="nav-item dropdown"  ngbDropdown >
                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
-                   <i class="fa fa-user"></i>{{currentUser.user.name | titlecase}} {{currentUser.user.last_name | titlecase}}
+                   {{currentUser.user.name | titlecase}} {{currentUser.user.last_name | titlecase}}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" ngbDropdownMenu >
                     <a class="dropdown-item" ngbDropdownItem (click)="logout()">Cerrar</a>

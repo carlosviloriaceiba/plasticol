@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.scss']
+  styleUrls: []
 })
 export class SummaryComponent implements OnInit {
   public summarys: Observable<Summary[]>;
