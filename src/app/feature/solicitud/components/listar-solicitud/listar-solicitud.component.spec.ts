@@ -3,16 +3,23 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpService } from '@core/services/http.service';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { SummaryComponent } from '@shared/components/summary/summary.component';
+import { ConfigModal } from '@shared/model/config-modal';
 import { TrackByPipe } from '@shared/pipe/track-by.pipe';
 import { AuthenticateService } from '@shared/service/authenticate.service';
+import { Solicitud } from '@solicitud/shared/model/solicitud';
 import { SolicitudService } from '@solicitud/shared/service/solicitud.service';
 
+
 import { ListarSolicitudComponent } from './listar-solicitud.component';
+import swal from 'sweetalert2';
+import { of } from 'rxjs';
 
 describe('ListarSolicitudComponent', () => {
   let component: ListarSolicitudComponent;
   let fixture: ComponentFixture<ListarSolicitudComponent>;
   let authenticateService: AuthenticateService;
+  let solicitudService: SolicitudService;
   const usuario = {
     sessionToken: '123EFXEX235',
     user: {
@@ -30,14 +37,37 @@ describe('ListarSolicitudComponent', () => {
       deleted_at: null
     }
   };
+  const solicitud: Solicitud = {
+      id: 1,
+      status: 'delivered',
+      city: 'Cartagena',
+      address: 'carrera 30 #63B 30',
+      productId: 1,
+      material_count: 2,
+      material_unit: 'Ton',
+      total_price: '333000',
+      contact_person: 'Rogelio Martinez',
+      contact_number: '3009002222',
+      day_to_dispatch: '2021-08-01 08:00:00',
+      created_at: '2021-01-01 08:00:59',
+      update_at: '2021-01-01 08:00:59',
+      deleted_at: null,
+      userId: 1
+  };
+  const configModal: ConfigModal = {
+        titulo:  'Cancelada!',
+        mensaje: 'Tu solicitud ha sido cancelada.',
+        tipo: 'success'
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule,
                 CommonModule
 
       ],
-      declarations: [ ListarSolicitudComponent, TrackByPipe, FaIconComponent ],
-      providers: [SolicitudService,
+      declarations: [ ListarSolicitudComponent, TrackByPipe, FaIconComponent, SummaryComponent ],
+      providers: [
+                  SolicitudService,
                   HttpService,
                   AuthenticateService,
                   TrackByPipe,
@@ -46,6 +76,8 @@ describe('ListarSolicitudComponent', () => {
     })
     .compileComponents();
     authenticateService = TestBed.inject(AuthenticateService);
+    solicitudService = TestBed.inject(SolicitudService);
+    solicitudService.currentUser = usuario;
     spyOnProperty(authenticateService, 'currentUserValue', 'get').and.returnValue(usuario);
   });
 
@@ -57,5 +89,30 @@ describe('ListarSolicitudComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Deberia chequear Eliminar', () => {
+
+    component.checkEliminar(solicitud);
+    expect(swal.isVisible()).toBeTruthy();
+    expect(swal.getTitle().textContent).toEqual('Estas seguro de eliminar?');
+    swal.clickConfirm();
+
+  });
+
+  it('Deberia chequear cancelar', () => {
+    component.cancelar(solicitud);
+    expect(swal.isVisible()).toBeTruthy();
+    expect(swal.getTitle().textContent).toEqual('Estas seguro de cancelar?');
+    swal.clickConfirm();
+  });
+
+
+  it('Deberia chequear actualizar', () => {
+    spyOn(solicitudService, 'actualizar').and.returnValue(of(true));
+    component.actualizar(solicitud, configModal);
+    expect(swal.isVisible()).toBeTruthy();
+    expect(swal.getTitle().textContent).toEqual(configModal.titulo);
+
   });
 });
