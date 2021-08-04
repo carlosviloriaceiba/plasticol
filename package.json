@@ -27,6 +27,7 @@
     "bootstrap": "^4.5.0",
     "colombian-holidays": "^1.7.4",
     "moment": "^2.29.1",
+    "ng-circle-progress": "^1.6.0",
     "ngx-cookie-service": "^11.0.2",
     "rxjs": "~6.6.7",
     "sweetalert2": "^10.0.2",
