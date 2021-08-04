@@ -8,7 +8,7 @@
           <ul class="navbar-nav ml-auto" *ngIf="currentUser">
              
               <li class="nav-item " *ngFor="let item of items" >
-                  <a class="nav-link " [routerLink]="item.url" routerLinkActive="active">{{item.nombre}}</a>
+                  <a class="nav-link" id="{{item.nombre| lowercase}}Link" [routerLink]="item.url" routerLinkActive="active">{{item.nombre}}</a>
               </li>
 
              
@@ -17,7 +17,7 @@
                    {{currentUser.user.name | titlecase}} {{currentUser.user.last_name | titlecase}}
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" ngbDropdownMenu >
-                    <a class="dropdown-item" ngbDropdownItem (click)="logout()">Cerrar</a>
+                    <a class="dropdown-item" id="logoutMenuLink" ngbDropdownItem (click)="logout()">Cerrar</a>
                   </div>
               </li>
           </ul>
