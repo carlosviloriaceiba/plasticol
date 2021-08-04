@@ -30,6 +30,16 @@ describe('SolicitudService', () => {
       deleted_at: null
     }
   };
+  const producto = {
+    id: 1,
+    name: 'Poliestireno (PS)',
+    active: true,
+    price: 300,
+    percentage_surcharge: 10,
+    created_at: '2021-01-01 08:00:59',
+    update_at: '2021-01-01 08:00:59',
+    deleted_at: null
+  };
   beforeEach(() => {
 
     const injector = TestBed.configureTestingModule({
@@ -142,4 +152,28 @@ describe('SolicitudService', () => {
     req.event(new HttpResponse<boolean>({body: true}));
   });
 
+
+  it('chequerar precio producto por KG', () => {
+     const price = 200 * producto.price;
+     const result = service.getPrice(producto, 200, 'KG');
+     expect(result).toEqual(price);
+  });
+
+  it('chequerar precio producto por Ton', () => {
+    const price = (200 / 0.0010000) * producto.price;
+    const result = service.getPrice(producto, 200, 'Ton');
+    expect(result).toEqual(price);
+  });
+  it('chequerar precio producto cero', () => {
+    const price = null;
+    const result = service.getPrice(producto, 0, 'Ton');
+    expect(result).toBeNull();
+    expect(result).toEqual(price);
+  });
+
+  it('chequerar precio producto sin unidad correcta', () => {
+    const price =  200 * producto.price;
+    const result = service.getPrice(producto, 200, '');
+    expect(result).toEqual(price);
+  });
 });

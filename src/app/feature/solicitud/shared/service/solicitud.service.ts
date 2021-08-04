@@ -53,7 +53,8 @@ export class SolicitudService {
     };
     let result = null;
     if (cantidad && cantidad > 0){
-      if (units[unidad] === 'Ton'){
+      const unit = units[unidad] === undefined ? units[`KG`] : units[unidad];
+      if (unit === 'Ton'){
         result = (cantidad / 0.0010000) * producto.price;
       }else {
         result = cantidad  * producto.price;

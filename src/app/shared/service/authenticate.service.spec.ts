@@ -3,12 +3,15 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
+import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { AuthenticateService } from './authenticate.service';
 
 
 describe('AuthenticateService', () => {
   let service: AuthenticateService;
+  let httpService: HttpService;
   const usuario = {
     sessionToken: '123EFXEX235',
     user: {
@@ -35,6 +38,11 @@ describe('AuthenticateService', () => {
       providers: [AuthenticateService, HttpService]
     });
     service = TestBed.inject(AuthenticateService);
+    httpService = TestBed.inject(HttpService);
+  });
+
+  afterEach(() => {
+    sessionStorage.removeItem(`${environment.session_key}`);
   });
 
   it('should be created', () => {
@@ -49,22 +57,20 @@ describe('AuthenticateService', () => {
     expect(dataUser).toEqual(usuario);
   });
   it('chequear login', () => {
+    spyOn(httpService, 'doPost');
+    spyOn(service, 'login').and.returnValue(of(usuario));
+    service.login(usuario.user).subscribe( (user) => {
+      expect(user).toEqual(usuario);
 
-    const login = spyOn(service, 'login');
-
-    service.login(usuario.user);
-
-    expect(login).toHaveBeenCalled();
+    });
 
   });
 
   it('chequear logout', () => {
 
-    const logout = spyOn(service, 'logout');
-
+    sessionStorage.setItem(`${environment.session_key}`, JSON.stringify(usuario));
     service.logout();
-
-    expect(logout).toHaveBeenCalled();
+    expect(sessionStorage.getItem(`${environment.session_key}`)).toBeNull();
 
   });
 });
