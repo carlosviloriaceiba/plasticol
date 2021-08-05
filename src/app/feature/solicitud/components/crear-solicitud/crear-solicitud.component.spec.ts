@@ -14,6 +14,8 @@ import { ListarSolicitudComponent } from '../listar-solicitud/listar-solicitud.c
 
 import { CrearSolicitudComponent } from './crear-solicitud.component';
 
+import swal from 'sweetalert2';
+
 describe('CrearSolicitudComponent', () => {
   let component: CrearSolicitudComponent;
   let fixture: ComponentFixture<CrearSolicitudComponent>;
@@ -81,7 +83,11 @@ describe('CrearSolicitudComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  afterAll(()=>{
+    if(swal.isVisible()){
+      swal.close()
+    }
+  })
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -180,5 +186,42 @@ describe('CrearSolicitudComponent', () => {
 
 
   });
+
+  it('deberia chequear formulario invalido', () => {
+    component.crearSolicitud();
+    expect(component.formSolicitud.valid).toBeFalse();
+    
+  })
+
+  it('deberia chequear al crear solicitud return false', () => {
+    spyOn(solicitudService, 'guardar').and.returnValue(of(false));
+    spyOn(productoService, 'returnProductoById').and.returnValue(producto);
+    component.baseProductos = productos;
+
+    component.ngOnInit();
+
+    component.formSolicitud.controls[`day_to_dispatch`].setValue(new NgbDate(2021, 8, 17));
+    component.formSolicitud.controls[`material_count`].setValue(200);
+    component.formSolicitud.controls[`material_unit`].setValue('KG');
+    component.formSolicitud.controls[`productId`].setValue(1);
+    component.formSolicitud.controls[`product`].setValue(producto);
+    component.formSolicitud.controls[`city`].setValue('Barranquilla');
+    component.formSolicitud.controls[`address`].setValue('Carrera 30 #39 Sur');
+    component.formSolicitud.controls[`contact_number`].setValue('3000101010');
+    component.formSolicitud.controls[`contact_person`].setValue('Julio Lopez');
+
+    
+    component.crearSolicitud();
+
+
+
+    solicitudService.guardar(component.formSolicitud.value).subscribe((response) => {
+      expect(response).toBeFalse();
+    });
+
+    
+  })
+
+
 
 });

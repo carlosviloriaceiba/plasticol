@@ -51,11 +51,12 @@ export class SolicitudService {
       Ton: 'Ton',
       KG: 'KG'
     };
+    const factorTonelada = 0.0010000;
     let result = null;
     if (cantidad && cantidad > 0){
       const unit = units[unidad] === undefined ? units[`KG`] : units[unidad];
       if (unit === 'Ton'){
-        result = (cantidad / 0.0010000) * producto.price;
+        result = (cantidad / factorTonelada) * producto.price;
       }else {
         result = cantidad  * producto.price;
       }
