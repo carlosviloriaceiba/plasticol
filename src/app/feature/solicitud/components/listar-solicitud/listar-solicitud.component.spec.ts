@@ -87,6 +87,9 @@ describe('ListarSolicitudComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListarSolicitudComponent);
     component = fixture.componentInstance;
+    if(swal.isVisible()){
+      swal.close();
+    }
     fixture.detectChanges();
   });
 
@@ -154,20 +157,6 @@ describe('ListarSolicitudComponent', () => {
     component.actualizar(solicitud, configModal);
     solicitudService.actualizar(solicitud).subscribe((response)=>{
       expect(response).toEqual(false);
-      done();
-    })    
-   
-  });
-
-  it('Deberia chequear actualizar configModal null', (done) => {
-    spyOn(solicitudService, 'actualizar').and.returnValue(of(true));
-
-    component.actualizar(solicitud, null);
-    solicitudService.actualizar(solicitud).subscribe(()=>{
-      setTimeout(() => {
-        expect(swal.isVisible()).toBeFalsy();
-        done();
-      }, 1000);
       done();
     })    
    
