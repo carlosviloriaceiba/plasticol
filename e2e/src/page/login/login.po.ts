@@ -8,7 +8,7 @@ export class LoginPage {
     private loginButton = element(by.id('login-btn'));
     private logoutButtonMenu = element(by.id('navbarDropdownMenuLink'));
     private logoutButtonAction = element(by.id('logoutMenuLink'));
-   
+
     async tieneTrm() {
         return this.trm.isPresent();
     }

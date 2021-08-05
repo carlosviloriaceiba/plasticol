@@ -38,6 +38,7 @@ export class ListarSolicitudComponent implements OnInit {
       if (result.isConfirmed) {
         const data = JSON.parse( JSON.stringify(solicitud));
         data.deleted_at = moment().format('YYYY-MM-DD hh:mm:ss');
+        data.status = 'deleted';
         const config: ConfigModal = { titulo:  'Borrado!',
                                       mensaje: 'Tu solicitud ha sido borrada.',
                                       tipo: 'success'

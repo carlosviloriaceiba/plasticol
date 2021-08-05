@@ -3,7 +3,7 @@
     <app-summary></app-summary>
     <div class="table-responsive">
 
-        <table class="table table-hover">
+        <table class="table table-hover" id="listadoSolicitudesTabla">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
@@ -54,7 +54,7 @@
                         </fa-icon>
                         <fa-icon 
                             [icon]="faBan"
-                            class="p-2"
+                            class="p-2 solicitudesButtonCancelar"
                             placement="top"
                             ngbTooltip="Cancelar"
                             *ngIf="!solicitud.deleted_at && (solicitud.status!=='delivered' && solicitud.status!=='cancel' )" 
@@ -62,7 +62,7 @@
                         </fa-icon>
                         <fa-icon 
                             [icon]="faTrashAlt" 
-                            class="p-2" 
+                            class="p-2 solicitudesButtonEliminar" 
                             placement="top" 
                             ngbTooltip="Eliminar"
                             (click)="checkEliminar(solicitud)" 
