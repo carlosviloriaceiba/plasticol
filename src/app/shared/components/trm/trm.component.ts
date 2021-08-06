@@ -9,7 +9,7 @@ import { TrmService } from '@shared/service/trm.service';
   styleUrls: []
 })
 export class TrmComponent implements OnInit {
-  currentTrm: Trm;
+  currentTrm: Trm[];
 
   constructor(private trmService: TrmService) {
     this.currentTrm = this.trmService.currenTrmValue;
@@ -17,8 +17,9 @@ export class TrmComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.currentTrm) {
-      this.trmService.mostrarTrm().subscribe(() => {
-        this.currentTrm = this.trmService.currenTrmValue;
+      this.trmService.mostrarTrm().subscribe((trm) => {
+        this.currentTrm = trm;
+        this.trmService.setTrm(trm);
       });
     }
   }

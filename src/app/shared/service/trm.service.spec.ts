@@ -1,15 +1,23 @@
-import { HttpClientModule, HttpParams } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { HttpService, Options } from '@core/services/http.service';
-import * as moment from 'moment';
+import { HttpService } from '@core/services/http.service';
+import { Trm } from '@shared/model/trm';
 import { of } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 
 import { TrmService } from './trm.service';
 
 describe('TrmService', () => {
   let service: TrmService;
   let httpService: HttpService;
+  const trm: Trm[] = [
+    {
+      valor: '3910.81',
+      unidad: 'COP',
+      vigenciadesde: '2021-08-06T00:00:00.000'
+    }
+  ];
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -26,16 +34,19 @@ describe('TrmService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should be created', () => {
-    const opts: Options = {
-      params: new HttpParams()
-      .set('$$app_token', environment.token_trm)
-      .set('$select', 'valor,unidad,vigenciadesde')
-      .set('vigenciadesde', moment().format('YYYY-MM-DDT00:00:00.000'))
-    };
-    spyOn(httpService, 'doGet').and.returnValue(of(undefined));
-    httpService.doGet(service.url, opts).subscribe( (trm) => {
-      expect(trm).toBeUndefined();
+
+  it('chequear setTrm', () => {
+
+    service.setTrm(trm);
+
+    expect(service.currenTrmValue).toEqual(trm);
+  });
+
+  it('chequear mostrarTrm', () => {
+    spyOn(httpService, 'doGet').and.returnValue(of(trm));
+    service.mostrarTrm().subscribe( (trmResult) => {
+      expect(trmResult).toEqual(trm);
     });
+
   });
 });
