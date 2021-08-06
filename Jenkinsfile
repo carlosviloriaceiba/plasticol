@@ -42,7 +42,7 @@ pipeline {
     stage('Test e2e') {
       steps{
         echo "------------>Test<------------"
-        sh 'npm install -g json-server'
+        sh 'npm install json-server'
         sh 'json-server --watch db.json --middlewares login-middleware.js'
         sh 'npm run e2e'
       }
