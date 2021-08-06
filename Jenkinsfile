@@ -39,6 +39,13 @@ pipeline {
         sh 'npm run test -- --watch=false --browsers ChromeHeadless'
       }
     }
+    stage('Test e2e') {
+      steps{
+        echo "------------>Test<------------"
+        sh 'json-server --watch db.json --middlewares login-middleware.js'
+        sh 'npm run e2e'
+      }
+    }
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
