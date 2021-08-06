@@ -129,4 +129,32 @@ describe('LoginComponent', () => {
 
   }));
 
+  it('chequear login form invalido', waitForAsync(() => {
+
+    component.login();
+
+    expect(component.loginForm.valid).toBeFalse();
+
+  }));
+
+
+
+  it('chequear  autenticado login have sessionToken', waitForAsync(() => {
+    spyOn(authenticateService, 'login').and.returnValue(
+      of(null)
+    );
+
+    component.loginForm.controls[`username`].setValue('admin@sofyplastic.com');
+    component.loginForm.controls[`password`].setValue('user1');
+
+    authenticateService.login(component.loginForm.value).subscribe((response) => {
+
+      expect(response).toBeNull();
+    });
+
+
+
+  }));
+
+
 });

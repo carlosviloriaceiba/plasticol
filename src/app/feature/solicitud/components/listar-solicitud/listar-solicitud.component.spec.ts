@@ -79,6 +79,9 @@ describe('ListarSolicitudComponent', () => {
     solicitudService = TestBed.inject(SolicitudService);
     solicitudService.currentUser = usuario;
     spyOnProperty(authenticateService, 'currentUserValue', 'get').and.returnValue(usuario);
+
+  });
+  afterEach(() => {
     if (swal.isVisible()){
       swal.close();
     }
