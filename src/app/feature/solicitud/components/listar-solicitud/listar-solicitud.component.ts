@@ -75,13 +75,13 @@ export class ListarSolicitudComponent implements OnInit {
 
     this.solicitudService.actualizar(solicitud).subscribe( (borrado) => {
       if (borrado){
-        this.solicitudActual = solicitud;       
+        this.solicitudActual = solicitud;
         swal.fire(
           configModal.titulo,
           configModal.mensaje,
           configModal.tipo
         );
-        
+
 
       }
 

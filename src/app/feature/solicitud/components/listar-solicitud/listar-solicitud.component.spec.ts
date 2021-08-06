@@ -79,7 +79,7 @@ describe('ListarSolicitudComponent', () => {
     solicitudService = TestBed.inject(SolicitudService);
     solicitudService.currentUser = usuario;
     spyOnProperty(authenticateService, 'currentUserValue', 'get').and.returnValue(usuario);
-    if(swal.isVisible()){
+    if (swal.isVisible()){
       swal.close();
     }
   });
@@ -87,10 +87,10 @@ describe('ListarSolicitudComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ListarSolicitudComponent);
     component = fixture.componentInstance;
-    if(swal.isVisible()){
+    fixture.detectChanges();
+    if (swal.isVisible()){
       swal.close();
     }
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -100,54 +100,68 @@ describe('ListarSolicitudComponent', () => {
   it('Deberia chequear Eliminar', (done) => {
 
     component.checkEliminar(solicitud);
-    expect(swal.isVisible()).toBeTruthy();
-    expect(swal.getTitle().textContent).toEqual('Estas seguro de eliminar?');
-    swal.clickConfirm();
+    setTimeout(() => {
+      expect(swal.isVisible()).toBeTruthy();
+      expect(swal.getTitle().textContent).toEqual('Estas seguro de eliminar?');
+      swal.clickConfirm();
+    }, 2500);
+
     setTimeout(() => {
       swal.clickConfirm();
-     done();
-    }, 2500);
+      done();
+    }, 3500);
 
   });
 
   it('Deberia chequear cancelar', (done) => {
     component.cancelar(solicitud);
-    expect(swal.isVisible()).toBeTruthy();
-    expect(swal.getTitle().textContent).toEqual('Estas seguro de cancelar?');
-    swal.clickConfirm();
+    setTimeout(() => {
+      expect(swal.isVisible()).toBeTruthy();
+      expect(swal.getTitle().textContent).toEqual('Estas seguro de cancelar?');
+      swal.clickConfirm();
+    }, 2500);
     setTimeout(() => {
       swal.clickConfirm();
-     done();
-    }, 2500);
+      done();
+    }, 3500);
   });
 
 
-  it('Deberia chequear actualizar', () => {
+  it('Deberia chequear actualizar', (done) => {
     spyOn(solicitudService, 'actualizar').and.returnValue(of(true));
     component.actualizar(solicitud, configModal);
-    expect(swal.isVisible()).toBeTruthy();
-    expect(swal.getTitle().textContent).toEqual(configModal.titulo);
+    setTimeout(() => {
+      expect(swal.isVisible()).toBeTruthy();
+      expect(swal.getTitle().textContent).toEqual(configModal.titulo);
+      done();
+    }, 2500);
+
 
   });
 
   it('Deberia chequear cancelar confirmacion cancelar solicitud', (done) => {
     component.cancelar(solicitud);
-    expect(swal.isVisible()).toBeTruthy();
-     swal.clickCancel();
-     setTimeout(() => {
+    setTimeout(() => {
+      expect(swal.isVisible()).toBeTruthy();
+      swal.clickCancel();
+    }, 2500);
+
+    setTimeout(() => {
       expect(swal.isVisible()).toBeFalse();
       done();
-    }, 2500);
+    }, 3500);
   });
 
   it('Deberia chequear cancelar confirmacion eliminar solicitud', (done) => {
     component.checkEliminar(solicitud);
-    expect(swal.isVisible()).toBeTruthy();
-    swal.clickCancel();
+    setTimeout(() => {
+      expect(swal.isVisible()).toBeTruthy();
+      swal.clickCancel();
+    }, 2500);
     setTimeout(() => {
       expect(swal.isVisible()).toBeFalsy();
       done();
-    }, 2500);
+    }, 3500);
   });
 
 
@@ -155,11 +169,11 @@ describe('ListarSolicitudComponent', () => {
     spyOn(solicitudService, 'actualizar').and.returnValue(of(false));
 
     component.actualizar(solicitud, configModal);
-    solicitudService.actualizar(solicitud).subscribe((response)=>{
+    solicitudService.actualizar(solicitud).subscribe((response) => {
       expect(response).toEqual(false);
       done();
-    })    
-   
+    });
+
   });
 
 

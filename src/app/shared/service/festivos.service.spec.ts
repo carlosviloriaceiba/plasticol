@@ -5,8 +5,9 @@ import { FestivosService } from './festivos.service';
 
 describe('FestivosService', () => {
   let service: FestivosService;
-  const diaFestivo: NgbDate = new NgbDate(2021, 8, 16);
-  const diaNormal: NgbDate =  new NgbDate(2021, 8, 17);
+
+  const diaFestivo: NgbDate = new NgbDate(new Date().getFullYear(), 12, 8);
+  const diaNormal: NgbDate =  new NgbDate(new Date().getFullYear(), 12, 1);
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(FestivosService);
@@ -24,4 +25,10 @@ describe('FestivosService', () => {
     const date = service.consultar(diaNormal);
     expect(date).toBeFalse();
    });
+
+  it('chequear date condicion consultar', () => {
+    const date = service.consultar(undefined);
+    expect(date).toBeFalse();
+  });
+
 });
