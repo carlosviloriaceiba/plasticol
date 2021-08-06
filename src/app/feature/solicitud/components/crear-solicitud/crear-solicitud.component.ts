@@ -34,14 +34,17 @@ export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
   public formSolicitud: FormGroup;
   public faCalendarAlt = faCalendarAlt;
   public markDisabled;
+  public diasParaHabilitarPedido = 2;
+  public factoParaMes = 1;
   public minDate =  {
     year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    day: new Date().getDate() + 2
+    month: new Date().getMonth() + this.factoParaMes,
+    day: new Date().getDate() + this.diasParaHabilitarPedido
   };
   public totalPedido = 0;
   public recargo = false;
-
+  public diasDisabled = 6;
+  public factorRecargo =  0.10;
   constructor(private festivosService: FestivosService,
               private productoService: ProductoService,
               private formBuilder: FormBuilder,
@@ -52,7 +55,7 @@ export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
               private route: ActivatedRoute
     ) {
       this.currentUser = this.authenticateService.currentUserValue;
-      this.markDisabled =  (date: NgbDate) => this.calendar.getWeekday(date) >= 6;
+      this.markDisabled =  (date: NgbDate) => this.calendar.getWeekday(date) >= this.diasDisabled;
    }
 
   ngAfterContentChecked(): void {
@@ -102,7 +105,7 @@ export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
       const value = this.solicitudService.getPrice(producto, cantidad, unidad);
       this.totalPedido = value;
       if ( this.recargo) {
-        this.totalPedido = this.totalPedido + (this.totalPedido * 0.10);
+        this.totalPedido = this.totalPedido + (this.totalPedido * this.factorRecargo);
 
       }
     }else{
