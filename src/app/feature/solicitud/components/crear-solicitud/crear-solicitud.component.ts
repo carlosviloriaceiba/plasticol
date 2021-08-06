@@ -11,11 +11,19 @@ import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 
+const diasParaHabilitarPedido = 2;
+const factoParaMes = 1;
+const diasDisabled = 6;
+const factorRecargo =  0.10;
+
 @Component({
   selector: 'app-crear-solicitud',
   templateUrl: './crear-solicitud.component.html',
   styleUrls: ['./crear-solicitud.component.scss']
 })
+
+
+
 export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
   public enviado = false;
   public baseProductos: Producto[];
@@ -34,17 +42,15 @@ export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
   public formSolicitud: FormGroup;
   public faCalendarAlt = faCalendarAlt;
   public markDisabled;
-  public diasParaHabilitarPedido = 2;
-  public factoParaMes = 1;
+
   public minDate =  {
     year: new Date().getFullYear(),
-    month: new Date().getMonth() + this.factoParaMes,
-    day: new Date().getDate() + this.diasParaHabilitarPedido
+    month: new Date().getMonth() + factoParaMes,
+    day: new Date().getDate() + diasParaHabilitarPedido
   };
   public totalPedido = 0;
   public recargo = false;
-  public diasDisabled = 6;
-  public factorRecargo =  0.10;
+
   constructor(private festivosService: FestivosService,
               private productoService: ProductoService,
               private formBuilder: FormBuilder,
@@ -55,7 +61,7 @@ export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
               private route: ActivatedRoute
     ) {
       this.currentUser = this.authenticateService.currentUserValue;
-      this.markDisabled =  (date: NgbDate) => this.calendar.getWeekday(date) >= this.diasDisabled;
+      this.markDisabled =  (date: NgbDate) => this.calendar.getWeekday(date) >= diasDisabled;
    }
 
   ngAfterContentChecked(): void {
@@ -105,7 +111,7 @@ export class CrearSolicitudComponent implements OnInit, AfterContentChecked {
       const value = this.solicitudService.getPrice(producto, cantidad, unidad);
       this.totalPedido = value;
       if ( this.recargo) {
-        this.totalPedido = this.totalPedido + (this.totalPedido * this.factorRecargo);
+        this.totalPedido = this.totalPedido + (this.totalPedido * factorRecargo);
 
       }
     }else{
