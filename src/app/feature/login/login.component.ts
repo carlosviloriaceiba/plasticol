@@ -38,8 +38,9 @@ export class LoginComponent implements OnInit {
   public login(){
     this.enviado = true;
     if (this.loginForm.valid){
-       this.authenticateService.login(this.loginForm.value).subscribe( () => {
-          this.redirect();
+       this.authenticateService.login(this.loginForm.value).subscribe( (user) => {
+        this.authenticateService.setUser(user);
+        this.redirect();
       });
 
     }

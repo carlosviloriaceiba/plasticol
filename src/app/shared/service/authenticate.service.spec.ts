@@ -73,4 +73,20 @@ describe('AuthenticateService', () => {
     expect(sessionStorage.getItem(`${environment.session_key}`)).toBeNull();
 
   });
+  it('chequear setUser', () => {
+
+    service.setUser(usuario);
+
+    expect(service.currentUserValue).toEqual(usuario);
+  });
+
+  it('chequear setUser', () => {
+    spyOn(httpService, 'doPost').and.returnValue(of(usuario));
+
+    service.login(usuario.user).subscribe((login) => {
+      expect(login).toEqual(usuario);
+
+    });
+
+  });
 });
