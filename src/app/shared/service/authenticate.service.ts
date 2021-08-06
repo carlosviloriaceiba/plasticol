@@ -23,10 +23,8 @@ export class AuthenticateService {
   public login(dataUser: User) {
     return this.http.doPost<User, Session>(`${environment.endpoint}/login`, dataUser, this.http.optsName('autenticar usuario'))
     .pipe(map((user: Session) => {
-      if (user && user.sessionToken){
-        sessionStorage.setItem(environment.session_key, JSON.stringify(user));
-        this.currentUserSubject.next(user);
-      }
+      sessionStorage.setItem(environment.session_key, JSON.stringify(user));
+      this.currentUserSubject.next(user);
       return user;
     }));
   }

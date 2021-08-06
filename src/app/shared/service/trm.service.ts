@@ -34,11 +34,8 @@ export class TrmService {
       .set('vigenciadesde', moment().format('YYYY-MM-DDT00:00:00.000'))
     };
     return this.http.doGet<Trm>(this.url, opts).pipe(map((trm: Trm) => {
-      if (trm && trm[0].hasOwnProperty('valor')){
-
-        sessionStorage.setItem(`${environment.session_key}_trm`, JSON.stringify(trm));
-        this.currentTrmSubject.next(trm);
-      }
+      sessionStorage.setItem(`${environment.session_key}_trm`, JSON.stringify(trm));
+      this.currentTrmSubject.next(trm);
       return trm;
     }));
   }
